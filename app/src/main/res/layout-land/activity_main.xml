@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
+
+    <fragment
+        android:id="@+id/list_fragment"
+        android:name="max.com.myapplication.ListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        tools:layout="@layout/list_fragment" />
+
+    <fragment
+        android:id="@+id/input_fragment"
+        android:name="max.com.myapplication.InputFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="300dp"
+        tools:layout="@layout/input_fragment" />
+
+</RelativeLayout>
