@@ -1,5 +1,6 @@
 package max.com.myapplication;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,8 +12,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class MyAdapter extends FragmentPagerAdapter {
 
 
-    public MyAdapter(FragmentManager fm) {
-        super(fm);
+    private Context context = null;
+
+    public MyAdapter(Context context, FragmentManager mgr) {
+        super(mgr);
+        this.context = context;
+    }
+
+    @Override
+    public int getCount() {
+        return (10);
     }
 
     @Override
@@ -21,7 +30,7 @@ public class MyAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public int getCount() {
-        return 10;
+    public String getPageTitle(int position) {
+        return (PageFragment.getTitle(context, position));
     }
 }

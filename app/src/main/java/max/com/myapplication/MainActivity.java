@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         button1 = (Button) findViewById(R.id.button2);
         ViewPager pager=(ViewPager)findViewById(R.id.pager);
-        pager.setAdapter(new MyAdapter(getSupportFragmentManager()));
+        pager.setAdapter(new MyAdapter(this, getSupportFragmentManager()));
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

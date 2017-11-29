@@ -1,5 +1,6 @@
 package max.com.myapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,13 +34,15 @@ public class PageFragment extends Fragment {
         pageNumber = getArguments() != null ? getArguments().getInt("num") : 1;
     }
 
-    @Nullable
+    static String getTitle(Context context, int position) {
+        return "Страница № " + String.valueOf(position+1);
+    }
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.fragment_page, container, false);
-        TextView pageHeader = (TextView) result.findViewById(R.id.displayText);
-        String header = String.format("Фрагмент %d", pageNumber + 1);
-        pageHeader.setText(header);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View result=inflater.inflate(R.layout.fragment_page, container, false);
+        TextView pageHeader=(TextView)result.findViewById(R.id.displayText);
+        pageHeader.setText("Фрагмент " + String.valueOf(pageNumber+1));
         return result;
     }
 }
