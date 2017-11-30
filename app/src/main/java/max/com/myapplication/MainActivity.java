@@ -1,5 +1,7 @@
 package max.com.myapplication;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.TimeUnit;
 import android.os.AsyncTask;
 import android.os.SystemClock;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
     Button button1;
+    Button button3;
     TextView textView;
     EditText editText;
     private final static String FILE_NAME = "content.txt";
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         button = (Button) findViewById(R.id.button);
         button1 = (Button) findViewById(R.id.button2);
+        button3 = (Button) findViewById(R.id.button3);
         ViewPager pager=(ViewPager)findViewById(R.id.pager);
         pager.setAdapter(new MyAdapter(this, getSupportFragmentManager()));
 
@@ -50,7 +54,30 @@ public class MainActivity extends AppCompatActivity {
                 openText(v);
             }
         });
-    }
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
+                db.execSQL("CREATE TABLE IF NOT EXISTS users (name TEXT, age INTEGER)");
+                db.execSQL("INSERT INTO users VALUES ('Tom Smith', 23);");
+                db.execSQL("INSERT INTO users VALUES ('John Dow', 31);");
+
+                Cursor query = db.rawQuery("SELECT * FROM users;", null);
+                TextView textView = (TextView) findViewById(R.id.textView3);
+                if(query.moveToFirst()){
+                    do{
+                        String name = query.getString(0);
+                        int age = query.getInt(1);
+                        textView.append("Name: " + name + " Age: " + age + "\n");
+                    }
+                    while(query.moveToNext());
+                }
+                query.close();
+                db.close();
+            }
+            }
+        );}
 
     public void saveText(View view) {
         FileOutputStream fos = null;
